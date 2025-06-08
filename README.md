@@ -122,11 +122,6 @@ php artisan queue:work
 
 Visit [http://localhost:8000](http://localhost:8000)
 
-Register or login using sample credentials:
-
-* **Admin**: [admin@example.com](mailto:admin@example.com)
-* **Bidder**: [bidder@example.com](mailto:bidder@example.com)
-
 #### Role Management
 
 By default, users are assigned the **bidder** role upon registration.
@@ -161,6 +156,12 @@ exit
 ```
 
 ---
+
+
+Register or login using sample credentials:
+
+* **Bidder**: [bidder@example.com](mailto:bidder@example.com)
+
 
 ## Usage
 
