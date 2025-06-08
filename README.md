@@ -115,7 +115,7 @@ A real-time auction platform built with **Laravel 12.17.0**, **Pusher Channels**
     $user->role = 'admin';
     $user->save();
 
-8. **Usage**:
+10. **Usage**:
 
     Admin: 
         Create auctions at /products/create.
