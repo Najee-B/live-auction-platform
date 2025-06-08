@@ -119,6 +119,7 @@ A real-time auction platform built with **Laravel 12.17.0**, **Pusher Channels**
             use App\Models\User;
             use Illuminate\Support\Facades\Hash;
 
+<<<<<<< HEAD
             User::create([
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
@@ -136,6 +137,8 @@ A real-time auction platform built with **Laravel 12.17.0**, **Pusher Channels**
 
 
 
+=======
+>>>>>>> b3f0d6c470e6dbb1ff01f553694af2c6883b86e0
 10. **Usage**:
 
     Admin: 
