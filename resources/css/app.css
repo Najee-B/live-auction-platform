@@ -1,0 +1,24 @@
+/* resources/css/app.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.chat-message {
+        max-width: 70%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 10px;
+        color: #000;
+    }
+    .chat-sender {
+        background-color: #d1e7dd; /* green */
+        align-self: flex-end;
+    }
+    .chat-receiver {
+        background-color: #f8d7da; /* red */
+        align-self: flex-start;
+    }
+
+    .card-img-top {
+    
+    max-height: 200px;
+}
+
+

@@ -1,0 +1,54 @@
+# Laravel-specific
+/vendor/
+/node_modules/
+/public/storage
+/public/hot
+/storage/*.key
+/storage/logs/*
+/storage/framework/*
+/storage/cache/*
+/bootstrap/cache/*
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Build and asset files
+/public/build/
+/dist/
+/build/
+
+# IDEs and Editors
+/.idea/
+/.vscode/*
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+!/.vscode/extensions.json
+*.code-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.log
+*.sqlite
+*.sqlite3
+
+# Composer and NPM
+composer.lock  # Optional: Include for dependency consistency
+npm-debug.log
+yarn-error.log
+package-lock.json  # Optional: Include for dependency consistency
+
+# Testing and debugging
+.phpactor.json
+coverage/
+report/
+
+# Miscellaneous
+*.bak
+*.swp
+*.tmp
