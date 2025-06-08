@@ -45,42 +45,6 @@
                 @endforeach
         </div>
 
-
-
-
-            <!-- <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Starting Price</th>
-                        <th>Current Price</th>
-                        <th>End Time</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($products as $product)
-                        <tr>
-                            <td>{{ $product->name }}</td>
-                            <td>${{ number_format($product->starting_price, 2) }}</td>
-                            <td>${{ number_format($product->current_price ?? $product->starting_price, 2) }}</td>
-                            <td>{{ $product->end_time->format('Y-m-d H:i:s') }}</td>
-                            <td>{{ ucfirst($product->status) }}</td>
-                            <td>
-                                <a href="{{ route('products.show', $product) }}" class="btn btn-sm btn-info">View</a>
-                                @if (auth()->user()->role === 'admin')
-                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table> -->
         </div>
     </div>
 
@@ -133,35 +97,36 @@
 
         waitForEcho(() => {
         console.log("Setting up Echo listeners...");
-        const channel = window.Echo.channel(`product.{{ $product->id }}`);
-        channel.subscribed(() => {
-            console.log(`Subscribed to product.{{ $product->id }}`);
-        }).error((error) => {
-            console.error(`Failed to subscribe to product.{{ $product->id }}:`, error);
-        });
+        @foreach ($products as $product)
+            const channel{{ $product->id }} = window.Echo.channel(`product.{{ $product->id }}`);
+            channel{{ $product->id }}.subscribed(() => {
+                console.log('Subscribed to product.{{ $product->id }}');
+            }).error((error) => {
+                console.error('Failed to subscribe to product.{{ $product->id }}:', error);
+            });
+        @endforeach
 
-        
+        @auth
+            const privateChannel = window.Echo.private(`App.Models.User.{{ auth()->id() }}`);
+            privateChannel.subscribed(() => {
+                console.log('Subscribed to private-App.Models.User.{{ auth()->id() }}');
+            }).error((error) => {
+                console.error('Failed to subscribe to private-App.Models.User.{{ auth()->id() }}:', error);
+            });
 
-        const privateChannel = window.Echo.private(`App.Models.User.{{ auth()->id() }}`);
-        privateChannel.subscribed(() => {
-            console.log(`Subscribed to private-App.Models.User.{{ auth()->id() }}`);
-        }).error((error) => {
-            console.error(`Failed to subscribe to private-App.Models.User.{{ auth()->id() }}:`, error);
-        });
+            privateChannel.notification((notification) => {
+                const container = document.getElementById('notification-container');
+                if (!container) return;
 
-        privateChannel.notification((notification) => {
-            console.log('Notification received:', notification);
-            const container = document.getElementById('notification-container');
-            if (!container) return;
-
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-warning alert-dismissible fade show';
-            alert.innerHTML = `
-                ${notification.message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-            container.prepend(alert);
-        });
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning alert-dismissible fade show';
+                alert.innerHTML = `
+                    ${notification.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                container.prepend(alert);
+            });
+        @endauth
     });
 </script>
 @endsection

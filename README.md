@@ -86,6 +86,8 @@ A real-time auction platform built with **Laravel 12.17.0**, **Pusher Channels**
 
     Run Migrations
 
+    php artisan:migrate
+
 6. **Link Storage**:
 
     php artisan storage:link
@@ -107,15 +109,34 @@ A real-time auction platform built with **Laravel 12.17.0**, **Pusher Channels**
     
     Default Role: Users are assigned the bidder role upon registration.
 
-    Set Admin Role:
+   
+    *Create Admin User in Tinker:
 
-    php artisan tinker
+        Access Tinker:
+            php artisan tinker
 
-    $user = \App\Models\User::find(1); // or where('email', 'admin@example.com')->first()
-    $user->role = 'admin';
-    $user->save();
+        Create Admin User:
+            use App\Models\User;
+            use Illuminate\Support\Facades\Hash;
 
-8. **Usage**:
+            User::create([
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'password' => Hash::make('password123'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]);
+
+        Verify:
+            User::where('email', 'admin@example.com')->first()->role
+            // Output: "admin"
+            
+        Exit Tinker:
+            exit
+
+
+
+10. **Usage**:
 
     Admin: 
         Create auctions at /products/create.
