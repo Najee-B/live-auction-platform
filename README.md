@@ -160,6 +160,7 @@ exit
 
 Register or login using sample credentials:
 
+* **Admin**: [admin@example.com](mailto:admin@example.com)
 * **Bidder**: [bidder@example.com](mailto:bidder@example.com)
 
 
